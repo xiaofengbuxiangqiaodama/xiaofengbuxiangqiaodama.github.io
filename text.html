@@ -1,0 +1,95 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+    <title>Baidu Map </title>  
+    <style type="text/css">  
+        html{width:100%;height:100%}  
+        body{width:100%;height:100%;margin:0px;padding:0px}
+      	#container{width:50px;height:25px;position:absolute;top:0%;left:74%;z-index:2}
+      	#chose{width:50px;height:25px;position:absolute;top:0%;left:96%;z-index:2}
+      	#header{width:100%;height:100%;position:absolute;top:0;left:0;}
+    </style>  
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=AgTgCED6RG3EjsPGskTmye0KBDp152zG"></script>
+
+</head>
+<body> 
+<div id="container">
+<form action="http://localhost:5000/place" target="_blank" method="POST">
+<select id="city" onchange="Change()" style="font-size:15px;"onclick="gerBoundary" size=1>
+<option value="北京">北京市</option>
+<option value="上海">上海市</option>
+<option value="天津">天津市</option>
+<option value="重庆直辖市">重庆市</option>
+<option value="海南">海南省</option>
+<option value="江西">江西省</option>
+<option value="湖南省">湖南省</option>
+<option value="河南省">河南省</option>
+<option value="安徽">安徽省</option>
+<option value="福建省">福建省</option>
+<option value="甘肃">甘肃省</option>
+<option value="贵州">贵州省</option>
+<option value="河北">河北省</option>
+<option value="黑龙江">黑龙江省</option>
+<option value="湖北">湖北省</option>
+<option value="吉林">吉林省</option>
+<option value="江苏省">江苏省</option>
+<option value="辽宁">辽宁省</option>
+<option value="青海">青海省</option>
+<option value="山东">山东省</option>
+<option value="山西">山西省</option>
+<option value="陕西">陕西省</option>
+<option value="四川">四川省</option>
+<option value="云南">云南省</option>
+<option value="浙江">浙江省</option>
+<option value="台湾">台湾省</option>
+<option value="广东">广东省</option>
+<option value="广西壮族自治区">广西壮族自治区</option>
+<option value="内蒙古自治区">内蒙古自治区</option>
+<option value="宁夏回族自治区">宁夏回族自治区</option>
+<option value="西藏自治区">西藏自治区</option>
+<option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+<option value="香港">香港</option>
+<option value="澳门">澳门</option>
+</select>
+</div>
+<div id="chose">
+<input type="submit" value="&#10004" style="font-size:15px;">
+</div>
+</form>
+<div id="header"></div>
+<script type="text/JavaScript">
+var map = new BMap.Map("header");
+map.addControl(new BMap.MapTypeControl());
+// 创建地图实例  
+map.centerAndZoom("北京", 8);
+  map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+	
+	
+	
+function Change() {
+  var myselect=document.getElementById("city");
+  var index=myselect.selectedIndex ;
+  var diqu= myselect.options[index].value;
+ 
+ 
+        var bdary = new BMap.Boundary();
+        bdary.get(diqu, function (rs) {//获取行政区域
+            map.clearOverlays();//清除地图覆盖物 
+            //给目标行政区划添加边框，其实就是给目标行政区划添加一个没有填充物的遮罩层
+            var ply = new BMap.Polygon(rs.boundaries[0], {strokeWeight: 2, strokeColor: "	#191970", fillColor: ""});
+            map.addOverlay(ply);
+            map.setViewport(ply.getPath());//调整视野
+        });
+    map.centerAndZoom(diqu);
+    }
+
+ 
+ 
+
+ 
+    </script>
+</body>  
+</html>
