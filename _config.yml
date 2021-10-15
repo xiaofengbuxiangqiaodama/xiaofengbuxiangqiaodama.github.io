@@ -6,7 +6,7 @@ description: 欢迎来到我的个人站~
 avatarTitle: leopardpan
 # 头像里面的描述
 avatarDesc: Java、算法学习
-url: "https://leopardpan.cn"
+url: "https://xiaofengbuxiangqiaodama.github.io"
 
 # 博客是否自动生成目录，false为不生成
 enableToc: true
@@ -59,7 +59,7 @@ nav:
     - {title: 标签, description: tags, url: '/tags'}      
     - {title: 技术支持, description: support, url: '/support'}      
     - {title: 关于我, description: about, url: '/about'}   
-    
+    - {title: 测试, description: text, url: '/text'}  
 
 # Pagination
 gems: [jekyll-paginate,jekyll-sitemap]
